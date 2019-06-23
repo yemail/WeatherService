@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:background="#2F5597"
+    android:layout_height="fill_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:id="@+id/longSection"
+            android:minWidth="25px"
+            android:minHeight="25px">
+            <TextView
+                android:text=""
+                android:textStyle="bold"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/tvLocation" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:id="@+id/longSection"
+            android:minWidth="25px"
+            android:minHeight="25px">
+            <TextView
+                android:text="as of "
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/tvAsOf" />
+            <DigitalClock
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/dcTime"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+            <TextView
+                android:text=""
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/tvTimeZone" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tempSection">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/tempSection">
+                <TextView
+                    android:textStyle="bold"
+                    android:text=""
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:layout_width="120dp"
+                    android:layout_height="50dp"
+                    android:gravity="left"
+                    android:id="@+id/tvTemperature"
+                    android:textSize="42dp" />
+                <TextView
+                    android:text="Weather type"
+                    android:textStyle="bold"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:gravity="left"
+                    android:id="@+id/tvWeatherType" />
+                <TextView
+                    android:text="Feel like"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:gravity="left"
+                    android:id="@+id/tvFeelLike" />
+            </LinearLayout>
+            <ImageView
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/imgWeatherType" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/condSection">
+            <TextView
+                android:text="Wind"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:textStyle="bold"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvWindTitle"
+                android:layout_marginRight="0.0dp" />
+            <TextView
+                android:text=""
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="256.0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvWindInfo" />
+            <TextView
+                android:text="Humidity"
+                android:textStyle="bold"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvHumidityTitle"
+                android:layout_marginRight="0.0dp" />
+            <TextView
+                android:text=""
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="106.5dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvHumidityInfo" />
+            <TextView
+                android:text="Air Quality"
+                android:textStyle="bold"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="277.5dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvAirQualityInfo" />
+            <TextView
+                android:text="Air  Quality Number"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/tvAirQualityNum"
+                android:layout_marginBottom="0.0dp" />
+        </LinearLayout>
+    </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/InnerRelativeLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:background="#203864"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="0.0dp"
+        android:layout_alignParentBottom="true">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:text=""
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/tvWelcomeInfo"
+                android:layout_height="match_parent"
+                android:layout_width="300dp"
+                android:textStyle="italic" />
+        </LinearLayout>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="300dp"
+            android:layout_alignParentRight="true"
+            android:id="@+id/imageMS" />
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="WeatherModelStoreContainer" CdmEntityContainer="WeatherEntities">
+    <EntitySetMapping Name="Air_Quality_Types">
+      <EntityTypeMapping TypeName="WeatherModel.Air_Quality_Types">
+        <MappingFragment StoreEntitySet="Air_Quality_Types">
+          <ScalarProperty Name="End" ColumnName="End" />
+          <ScalarProperty Name="Start" ColumnName="Start" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Air_Quality_Type_Id" ColumnName="Air_Quality_Type_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Location_Aware_Message">
+      <EntityTypeMapping TypeName="WeatherModel.Location_Aware_Message">
+        <MappingFragment StoreEntitySet="Location_Aware_Message">
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="Spatial_Id" ColumnName="Spatial_Id" />
+          <ScalarProperty Name="Message_Id" ColumnName="Message_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Spatials">
+      <EntityTypeMapping TypeName="WeatherModel.Spatial">
+        <MappingFragment StoreEntitySet="Spatial">
+          <ScalarProperty Name="GeoLocation" ColumnName="GeoLocation" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="Spatial_Id" ColumnName="Spatial_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Weathers">
+      <EntityTypeMapping TypeName="WeatherModel.Weather">
+        <MappingFragment StoreEntitySet="Weather">
+          <ScalarProperty Name="Air_Quality_Num" ColumnName="Air_Quality_Num" />
+          <ScalarProperty Name="Humidity" ColumnName="Humidity" />
+          <ScalarProperty Name="Wind_Direction_Id" ColumnName="Wind_Direction_Id" />
+          <ScalarProperty Name="Wind_Speed" ColumnName="Wind_Speed" />
+          <ScalarProperty Name="Weather_Type_Id" ColumnName="Weather_Type_Id" />
+          <ScalarProperty Name="Temperature_Feels" ColumnName="Temperature_Feels" />
+          <ScalarProperty Name="Temperature" ColumnName="Temperature" />
+          <ScalarProperty Name="Spatial_Id" ColumnName="Spatial_Id" />
+          <ScalarProperty Name="Weather_Id" ColumnName="Weather_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Weather_Types">
+      <EntityTypeMapping TypeName="WeatherModel.Weather_Types">
+        <MappingFragment StoreEntitySet="Weather_Types">
+          <ScalarProperty Name="Weather_Type" ColumnName="Weather_Type" />
+          <ScalarProperty Name="Weather_Type_Id" ColumnName="Weather_Type_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Wind_Directions">
+      <EntityTypeMapping TypeName="WeatherModel.Wind_Directions">
+        <MappingFragment StoreEntitySet="Wind_Directions">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Wind_Direction_Id" ColumnName="Wind_Direction_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Wind_Levels">
+      <EntityTypeMapping TypeName="WeatherModel.Wind_Levels">
+        <MappingFragment StoreEntitySet="Wind_Levels">
+          <ScalarProperty Name="Speed_End" ColumnName="Speed_End" />
+          <ScalarProperty Name="Speed_Start" ColumnName="Speed_Start" />
+          <ScalarProperty Name="Level" ColumnName="Level" />
+          <ScalarProperty Name="Wind_Level_Id" ColumnName="Wind_Level_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,5 @@
+C:\projects\AndoridSamples\WeatherREST\Weather.DTO\bin\Debug\Weather.DTO.dll
+C:\projects\AndoridSamples\WeatherREST\Weather.DTO\bin\Debug\Weather.DTO.pdb
+C:\projects\AndoridSamples\WeatherREST\Weather.DTO\obj\Debug\Weather.DTO.csprojResolveAssemblyReference.cache
+C:\projects\AndoridSamples\WeatherREST\Weather.DTO\obj\Debug\Weather.DTO.dll
+C:\projects\AndoridSamples\WeatherREST\Weather.DTO\obj\Debug\Weather.DTO.pdb

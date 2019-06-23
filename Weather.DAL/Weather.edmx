@@ -1,0 +1,391 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="WeatherModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Air_Quality_Types">
+          <Key>
+            <PropertyRef Name="Air_Quality_Type_Id" />
+          </Key>
+          <Property Name="Air_Quality_Type_Id" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Start" Type="int" Nullable="false" />
+          <Property Name="End" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Location_Aware_Message">
+          <Key>
+            <PropertyRef Name="Message_Id" />
+          </Key>
+          <Property Name="Message_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Spatial_Id" Type="int" Nullable="false" />
+          <Property Name="Message" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Spatial">
+          <Key>
+            <PropertyRef Name="Spatial_Id" />
+          </Key>
+          <Property Name="Spatial_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Country" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="GeoLocation" Type="geography" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Weather">
+          <Key>
+            <PropertyRef Name="Weather_Id" />
+          </Key>
+          <Property Name="Weather_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Spatial_Id" Type="int" Nullable="false" />
+          <Property Name="Temperature" Type="float" />
+          <Property Name="Temperature_Feels" Type="float" Nullable="false" />
+          <Property Name="Weather_Type_Id" Type="int" Nullable="false" />
+          <Property Name="Wind_Speed" Type="int" />
+          <Property Name="Wind_Direction_Id" Type="int" />
+          <Property Name="Humidity" Type="float" />
+          <Property Name="Air_Quality_Num" Type="int" />
+        </EntityType>
+        <EntityType Name="Weather_Types">
+          <Key>
+            <PropertyRef Name="Weather_Type_Id" />
+          </Key>
+          <Property Name="Weather_Type_Id" Type="int" Nullable="false" />
+          <Property Name="Weather_Type" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Wind_Directions">
+          <Key>
+            <PropertyRef Name="Wind_Direction_Id" />
+          </Key>
+          <Property Name="Wind_Direction_Id" Type="int" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Wind_Levels">
+          <Key>
+            <PropertyRef Name="Wind_Level_Id" />
+          </Key>
+          <Property Name="Wind_Level_Id" Type="int" Nullable="false" />
+          <Property Name="Level" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Speed_Start" Type="int" />
+          <Property Name="Speed_End" Type="int" />
+        </EntityType>
+        <Association Name="FK_Location_Aware_Message_Spatial">
+          <End Role="Spatial" Type="Self.Spatial" Multiplicity="1" />
+          <End Role="Location_Aware_Message" Type="Self.Location_Aware_Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Spatial">
+              <PropertyRef Name="Spatial_Id" />
+            </Principal>
+            <Dependent Role="Location_Aware_Message">
+              <PropertyRef Name="Spatial_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Weather_Spatial">
+          <End Role="Spatial" Type="Self.Spatial" Multiplicity="1" />
+          <End Role="Weather" Type="Self.Weather" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Spatial">
+              <PropertyRef Name="Spatial_Id" />
+            </Principal>
+            <Dependent Role="Weather">
+              <PropertyRef Name="Spatial_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Weather_Weather_Types">
+          <End Role="Weather_Types" Type="Self.Weather_Types" Multiplicity="1" />
+          <End Role="Weather" Type="Self.Weather" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Weather_Types">
+              <PropertyRef Name="Weather_Type_Id" />
+            </Principal>
+            <Dependent Role="Weather">
+              <PropertyRef Name="Weather_Type_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Weather_Wind_Directions">
+          <End Role="Wind_Directions" Type="Self.Wind_Directions" Multiplicity="0..1" />
+          <End Role="Weather" Type="Self.Weather" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wind_Directions">
+              <PropertyRef Name="Wind_Direction_Id" />
+            </Principal>
+            <Dependent Role="Weather">
+              <PropertyRef Name="Wind_Direction_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WeatherModelStoreContainer">
+          <EntitySet Name="Air_Quality_Types" EntityType="Self.Air_Quality_Types" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Location_Aware_Message" EntityType="Self.Location_Aware_Message" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Spatial" EntityType="Self.Spatial" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Weather" EntityType="Self.Weather" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Weather_Types" EntityType="Self.Weather_Types" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Wind_Directions" EntityType="Self.Wind_Directions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Wind_Levels" EntityType="Self.Wind_Levels" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Location_Aware_Message_Spatial" Association="Self.FK_Location_Aware_Message_Spatial">
+            <End Role="Spatial" EntitySet="Spatial" />
+            <End Role="Location_Aware_Message" EntitySet="Location_Aware_Message" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Weather_Spatial" Association="Self.FK_Weather_Spatial">
+            <End Role="Spatial" EntitySet="Spatial" />
+            <End Role="Weather" EntitySet="Weather" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Weather_Weather_Types" Association="Self.FK_Weather_Weather_Types">
+            <End Role="Weather_Types" EntitySet="Weather_Types" />
+            <End Role="Weather" EntitySet="Weather" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Weather_Wind_Directions" Association="Self.FK_Weather_Wind_Directions">
+            <End Role="Wind_Directions" EntitySet="Wind_Directions" />
+            <End Role="Weather" EntitySet="Weather" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WeatherModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="WeatherEntities" annotation:LazyLoadingEnabled="false">
+          <EntitySet Name="Air_Quality_Types" EntityType="WeatherModel.Air_Quality_Types" />
+          <EntitySet Name="Location_Aware_Message" EntityType="WeatherModel.Location_Aware_Message" />
+          <EntitySet Name="Spatials" EntityType="WeatherModel.Spatial" />
+          <EntitySet Name="Weathers" EntityType="WeatherModel.Weather" />
+          <EntitySet Name="Weather_Types" EntityType="WeatherModel.Weather_Types" />
+          <EntitySet Name="Wind_Directions" EntityType="WeatherModel.Wind_Directions" />
+          <EntitySet Name="Wind_Levels" EntityType="WeatherModel.Wind_Levels" />
+          <AssociationSet Name="FK_Location_Aware_Message_Spatial" Association="WeatherModel.FK_Location_Aware_Message_Spatial">
+            <End Role="Spatial" EntitySet="Spatials" />
+            <End Role="Location_Aware_Message" EntitySet="Location_Aware_Message" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Weather_Spatial" Association="WeatherModel.FK_Weather_Spatial">
+            <End Role="Spatial" EntitySet="Spatials" />
+            <End Role="Weather" EntitySet="Weathers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Weather_Weather_Types" Association="WeatherModel.FK_Weather_Weather_Types">
+            <End Role="Weather_Types" EntitySet="Weather_Types" />
+            <End Role="Weather" EntitySet="Weathers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Weather_Wind_Directions" Association="WeatherModel.FK_Weather_Wind_Directions">
+            <End Role="Wind_Directions" EntitySet="Wind_Directions" />
+            <End Role="Weather" EntitySet="Weathers" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Air_Quality_Types">
+          <Key>
+            <PropertyRef Name="Air_Quality_Type_Id" />
+          </Key>
+          <Property Name="Air_Quality_Type_Id" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Start" Type="Int32" Nullable="false" />
+          <Property Name="End" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Location_Aware_Message">
+          <Key>
+            <PropertyRef Name="Message_Id" />
+          </Key>
+          <Property Name="Message_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Spatial_Id" Type="Int32" Nullable="false" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Spatial" Relationship="WeatherModel.FK_Location_Aware_Message_Spatial" FromRole="Location_Aware_Message" ToRole="Spatial" />
+        </EntityType>
+        <EntityType Name="Spatial">
+          <Key>
+            <PropertyRef Name="Spatial_Id" />
+          </Key>
+          <Property Name="Spatial_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Country" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GeoLocation" Type="Geography" Nullable="false" />
+          <NavigationProperty Name="Location_Aware_Message" Relationship="WeatherModel.FK_Location_Aware_Message_Spatial" FromRole="Spatial" ToRole="Location_Aware_Message" />
+          <NavigationProperty Name="Weathers" Relationship="WeatherModel.FK_Weather_Spatial" FromRole="Spatial" ToRole="Weather" />
+        </EntityType>
+        <EntityType Name="Weather">
+          <Key>
+            <PropertyRef Name="Weather_Id" />
+          </Key>
+          <Property Name="Weather_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Spatial_Id" Type="Int32" Nullable="false" />
+          <Property Name="Temperature" Type="Double" />
+          <Property Name="Temperature_Feels" Type="Double" Nullable="false" />
+          <Property Name="Weather_Type_Id" Type="Int32" Nullable="false" />
+          <Property Name="Wind_Speed" Type="Int32" />
+          <Property Name="Wind_Direction_Id" Type="Int32" />
+          <Property Name="Humidity" Type="Double" />
+          <Property Name="Air_Quality_Num" Type="Int32" />
+          <NavigationProperty Name="Spatial" Relationship="WeatherModel.FK_Weather_Spatial" FromRole="Weather" ToRole="Spatial" />
+          <NavigationProperty Name="Weather_Types" Relationship="WeatherModel.FK_Weather_Weather_Types" FromRole="Weather" ToRole="Weather_Types" />
+          <NavigationProperty Name="Wind_Directions" Relationship="WeatherModel.FK_Weather_Wind_Directions" FromRole="Weather" ToRole="Wind_Directions" />
+        </EntityType>
+        <EntityType Name="Weather_Types">
+          <Key>
+            <PropertyRef Name="Weather_Type_Id" />
+          </Key>
+          <Property Name="Weather_Type_Id" Type="Int32" Nullable="false" />
+          <Property Name="Weather_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Weathers" Relationship="WeatherModel.FK_Weather_Weather_Types" FromRole="Weather_Types" ToRole="Weather" />
+        </EntityType>
+        <EntityType Name="Wind_Directions">
+          <Key>
+            <PropertyRef Name="Wind_Direction_Id" />
+          </Key>
+          <Property Name="Wind_Direction_Id" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Weathers" Relationship="WeatherModel.FK_Weather_Wind_Directions" FromRole="Wind_Directions" ToRole="Weather" />
+        </EntityType>
+        <EntityType Name="Wind_Levels">
+          <Key>
+            <PropertyRef Name="Wind_Level_Id" />
+          </Key>
+          <Property Name="Wind_Level_Id" Type="Int32" Nullable="false" />
+          <Property Name="Level" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Speed_Start" Type="Int32" />
+          <Property Name="Speed_End" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_Location_Aware_Message_Spatial">
+          <End Type="WeatherModel.Spatial" Role="Spatial" Multiplicity="1" />
+          <End Type="WeatherModel.Location_Aware_Message" Role="Location_Aware_Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Spatial">
+              <PropertyRef Name="Spatial_Id" />
+            </Principal>
+            <Dependent Role="Location_Aware_Message">
+              <PropertyRef Name="Spatial_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Weather_Spatial">
+          <End Type="WeatherModel.Spatial" Role="Spatial" Multiplicity="1" />
+          <End Type="WeatherModel.Weather" Role="Weather" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Spatial">
+              <PropertyRef Name="Spatial_Id" />
+            </Principal>
+            <Dependent Role="Weather">
+              <PropertyRef Name="Spatial_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Weather_Weather_Types">
+          <End Type="WeatherModel.Weather_Types" Role="Weather_Types" Multiplicity="1" />
+          <End Type="WeatherModel.Weather" Role="Weather" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Weather_Types">
+              <PropertyRef Name="Weather_Type_Id" />
+            </Principal>
+            <Dependent Role="Weather">
+              <PropertyRef Name="Weather_Type_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Weather_Wind_Directions">
+          <End Type="WeatherModel.Wind_Directions" Role="Wind_Directions" Multiplicity="0..1" />
+          <End Type="WeatherModel.Weather" Role="Weather" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wind_Directions">
+              <PropertyRef Name="Wind_Direction_Id" />
+            </Principal>
+            <Dependent Role="Weather">
+              <PropertyRef Name="Wind_Direction_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WeatherModelStoreContainer" CdmEntityContainer="WeatherEntities">
+          <EntitySetMapping Name="Air_Quality_Types">
+            <EntityTypeMapping TypeName="WeatherModel.Air_Quality_Types">
+              <MappingFragment StoreEntitySet="Air_Quality_Types">
+                <ScalarProperty Name="End" ColumnName="End" />
+                <ScalarProperty Name="Start" ColumnName="Start" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Air_Quality_Type_Id" ColumnName="Air_Quality_Type_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Location_Aware_Message">
+            <EntityTypeMapping TypeName="WeatherModel.Location_Aware_Message">
+              <MappingFragment StoreEntitySet="Location_Aware_Message">
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Spatial_Id" ColumnName="Spatial_Id" />
+                <ScalarProperty Name="Message_Id" ColumnName="Message_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Spatials">
+            <EntityTypeMapping TypeName="WeatherModel.Spatial">
+              <MappingFragment StoreEntitySet="Spatial">
+                <ScalarProperty Name="GeoLocation" ColumnName="GeoLocation" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Spatial_Id" ColumnName="Spatial_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Weathers">
+            <EntityTypeMapping TypeName="WeatherModel.Weather">
+              <MappingFragment StoreEntitySet="Weather">
+                <ScalarProperty Name="Air_Quality_Num" ColumnName="Air_Quality_Num" />
+                <ScalarProperty Name="Humidity" ColumnName="Humidity" />
+                <ScalarProperty Name="Wind_Direction_Id" ColumnName="Wind_Direction_Id" />
+                <ScalarProperty Name="Wind_Speed" ColumnName="Wind_Speed" />
+                <ScalarProperty Name="Weather_Type_Id" ColumnName="Weather_Type_Id" />
+                <ScalarProperty Name="Temperature_Feels" ColumnName="Temperature_Feels" />
+                <ScalarProperty Name="Temperature" ColumnName="Temperature" />
+                <ScalarProperty Name="Spatial_Id" ColumnName="Spatial_Id" />
+                <ScalarProperty Name="Weather_Id" ColumnName="Weather_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Weather_Types">
+            <EntityTypeMapping TypeName="WeatherModel.Weather_Types">
+              <MappingFragment StoreEntitySet="Weather_Types">
+                <ScalarProperty Name="Weather_Type" ColumnName="Weather_Type" />
+                <ScalarProperty Name="Weather_Type_Id" ColumnName="Weather_Type_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Wind_Directions">
+            <EntityTypeMapping TypeName="WeatherModel.Wind_Directions">
+              <MappingFragment StoreEntitySet="Wind_Directions">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Wind_Direction_Id" ColumnName="Wind_Direction_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Wind_Levels">
+            <EntityTypeMapping TypeName="WeatherModel.Wind_Levels">
+              <MappingFragment StoreEntitySet="Wind_Levels">
+                <ScalarProperty Name="Speed_End" ColumnName="Speed_End" />
+                <ScalarProperty Name="Speed_Start" ColumnName="Speed_Start" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="Wind_Level_Id" ColumnName="Wind_Level_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
